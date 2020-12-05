@@ -1,58 +1,20 @@
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @book.body %>
-</p>
-
-<%= link_to "Edit", edit_book_path(@book) %> |
-<%= link_to "Back", books_path %>
-
-<% if current_user.id == @user.id %>
-
-  <%= render 'books/user', user: @user %>
-  <%= render 'books/post', book: @book %>
-
-  <h2>Book detail</h2>
-  <table class="table">
-    <tbody>
+<%= render 'books/error', book: @book %>
+<div class="row">
+  <%= render 'books/left_column', user: @user, book: @new %>
+  <div class='col-md-8 offset-md-1'>
+    <h2>Book detail</h2>
+    <table class="table">
       <tr>
-        <td>
-          <%= link_to user_path(@user) do %>
-          <%= attachment_image_tag @book.user, :profile_image, size: "100x100", fallback: "no_image.jpg" %>
-          <br>
-          <%= @user.name %>
-          <% end %>
+        <td><%= attachment_image_tag @book.user, :profile_image, size: "40x40", fallback: "no_image.jpg" %>
+          <p><%= link_to @user.name, user_path(@book.user.id), class: "user_#{@book.user.id}" %></p>
         </td>
-        <td>
-          <%= link_to book_path(params[:id]) do %>
-          <%= @book.title %>
-          <% end %>
-        </td>
+        <td><%= link_to @book.title, book_path(@book.id), class: "book_#{@book.id}" %></td>
         <td><%= @book.body %></td>
-        <td><%= link_to "Edit", edit_book_path(params[:id]), class: "btn-sm btn-success" %></td>
-        <td><%= link_to "Destroy", book_path(@book), method: :delete, class: "btn-sm btn-danger", "data-confirm" => "本当に消しますか？" %></td>
+        <% if @book.user == current_user %>
+          <td><%= link_to "Edit", edit_book_path(@book.id), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
+          <td><%= link_to "Destroy", book_path(@book.id), method: :delete, class: "btn-sm btn-danger destroy_book_#{@book.id}", "data-confirm" => "本当に消しますか？" %></td>
+        <% end %>
       </tr>
-    </tbody>
-  </table>
-<% else %>
-  <%= render 'books/user', user: @user %>
-  <%= render 'books/post', book: @book %>
-  <table class="table">
-    <tbody>
-      <tr>
-        <td>
-          <%= link_to user_path(@user) do %>
-          <%= attachment_image_tag @book.user, :profile_image, size: "100x100", fallback: "no_image.jpg" %>
-          <br>
-          <%= @user.name %>
-          <% end %>
-        </td>
-        <td><%= @book.body %></td>
-      </tr>
-    </tbody>
-  </table>
-<% end %>
+    </table>
+  </div>
+</div>
