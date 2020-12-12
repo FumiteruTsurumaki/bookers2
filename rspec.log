@@ -199,6 +199,6 @@ bootstrapのテスト
 [32m      投稿一覧のtitleのリンク先が正しい[0m
 [32m      投稿一覧にopinionが表示される[0m
 
-Finished in 9.79 seconds (files took 1.45 seconds to load)
+Finished in 8.98 seconds (files took 1.41 seconds to load)
 [32m113 examples, 0 failures[0m
 
