@@ -1,7 +1,7 @@
 <%= render 'books/error', book: @book %>
 <div class="row">
   <%= render 'books/left_column', user: @user, book: @book %>
-  <div class='col-md-8 offset-md-1'>
+  <div class='col-md-8 col-xs-9 offset-md-1'>
     <h2>Books</h2>
     <table class='table table-hover table-inverse'>
       <thead>
@@ -37,6 +37,7 @@
               <% end %>
             </td>
           <% end %>
+            <td>コメント数：<%= book.book_comments.count %></td>
           </tr>
         <% end %>
       </tbody>
